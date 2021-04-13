@@ -2,8 +2,8 @@ const core = require("@actions/core");
 const fs = require("fs");
 const Octokit = require("@octokit/rest");
 
-const isLgtmString = target => {
-  return target.trim().toLowerCase() === "lgtm";
+const isLgtmString = (text, triggerWords) => {
+  return text.trim().toLowerCase() === triggerWords;
 };
 
 // most @actions toolkit packages have async methods
@@ -16,6 +16,7 @@ async function run() {
 
     // github client
     const token = core.getInput("token");
+    const triggerWords = core.getInput("trigger_words");
     const octokit = new Octokit({
       auth: `token ${token}`,
     });
@@ -24,7 +25,7 @@ async function run() {
     const issueInfo = JSON.parse(
       fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8")
     );
-    if (!isLgtmString(issueInfo.comment.body)) return;
+    if (!isLgtmString(issueInfo.comment.body, triggerWords)) return;
     octokit.issues.createComment({
       owner: repoOwner,
       repo: repoName,
