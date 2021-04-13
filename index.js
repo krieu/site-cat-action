@@ -16,7 +16,7 @@ async function run() {
 
     // github client
     const token = core.getInput("token");
-    const triggerWord = core.getInput("trigger_word");
+    const triggerWord = core.getInput("triggerWord");
     const octokit = new Octokit({
       auth: `token ${token}`,
     });

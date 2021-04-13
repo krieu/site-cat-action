@@ -4,7 +4,7 @@ inputs:
   token:
     description: "GitHub Token(scope: repo)"
     required: true
-  trigger_word:
+  triggerWord:
     description: "action trigger word"
     required: false
     default: "LGTM"
