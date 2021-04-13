@@ -16,7 +16,7 @@ async function run() {
 
     // github client
     const token = core.getInput("token");
-    const triggerWords = core.getInput("trigger_words");
+    const triggerWord = core.getInput("trigger_word");
     const octokit = new Octokit({
       auth: `token ${token}`,
     });
@@ -25,7 +25,7 @@ async function run() {
     const issueInfo = JSON.parse(
       fs.readFileSync(process.env.GITHUB_EVENT_PATH, "utf8")
     );
-    if (!isLgtmString(issueInfo.comment.body, triggerWords)) return;
+    if (!isLgtmString(issueInfo.comment.body, triggerWord)) return;
     octokit.issues.createComment({
       owner: repoOwner,
       repo: repoName,
