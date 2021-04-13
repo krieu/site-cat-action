@@ -1,9 +1,14 @@
-name: 'Site Cat LGTM'
-description: 'Site-cat appears on issue when someone posts `lgtm`'
+name: "Site Cat LGTM"
+description: "Site-cat appears on issue when someone posts `lgtm`"
 inputs:
   token:
-    description: 'GitHub Token(scope: repo)'
+    description: "GitHub Token(scope: repo)"
     required: true
+  trigger_word:
+    description: "action trigger word"
+    required: false
+    default: "LGTM"
+
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
